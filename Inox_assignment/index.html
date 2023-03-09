@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="./movie.js"></script>
+    <title>Inox Movie</title>
+</head>
+
+<body>
+
+    <h2>Inox Movies</h2>
+
+    <button class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#registerMovies" >Book Movie</button>
+
+    <div class="modal fade" id="registerMovies">
+        dsfsd
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content ">
+                <div class="modal-header">
+                   <h2 class="modal-title">Book Movie</h2>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex justify-content-center">
+                        <label for="MovieName">Movie</label>
+                        <select name="movie" id="movie" class="form-select">
+                            <option value="KGF">KGF</option>
+                            <option value="Pathaan">Pathaan</option>
+                        </select>
+                        <label for="Theater">Theater</label>
+                        <select name="movie" id="theater" class="form-select">
+                            <option value="Inox Gvk">Inox Gvk</option>
+                            <option value="Inox Ameerpet">Inox Ameerpet</option>
+                        </select>
+                        <label for="Date">Date</label>
+
+                        <input type="date" name="" id="bookingDate" class="form-control">
+                        <!-- <select name="movie" id="movie" class="form-select">
+                            <option value="KGF">KGF</option>
+                            <option value="Pathaan">Pathaan</option>
+                        </select> -->
+                        <label for="Time">Time</label>
+                        <input type="time" name="" id="bookingTime" class="form-control">
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-success" data-bs-dismiss="modal" onclick="saveBooking()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="display-movie">
+
+    <p>Movie Details</p>
+    <span></span>
+    <dl>
+        <dt>Movie</dt>
+        <dd>Pathan</dd>
+        <dt>Movie</dt>
+        <dd>Pathan</dd>
+        <dt>Movie</dt>
+        <dd>Pathan</dd>
+    </dl>
+</div>
+
+
+    <script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>
