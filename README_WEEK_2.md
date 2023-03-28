@@ -1126,5 +1126,801 @@ Ex:
     }
 </script>
 
-# 12th March 2023
+# 13th March 2023
 ====================
+Number Types
+- What are the values reffered as numbers?
+- How to parse ?
+- How to check the type?
+- Math
+
+onload
+onclick
+
+Ex:
+emi.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMI Calculator</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <style>
+        .box {
+            background-color: white;
+            box-shadow: 6px 6px 3px gray;
+            padding: 20px;
+        }
+    </style>
+    <script src="../src/scripts/emi.js" type="text/javascript"></script>
+</head>
+<body class="container-fluid">
+    <h1>Personal Loan EMI Calculator</h1>
+    <div class="box">
+        <div class="row">
+            <div class="col">
+                Amount you need &#8377; <input type="text" onchange="AmountTextBoxChanged()" id="txtAmount" size="10">
+            </div>
+            <div class="col">
+                for <input type="text" size="2" id="txtYears" onchange="YearTextBoxChanged()"> years
+            </div>
+            <div class="col">
+                interest rate <input type="text" id="txtRate" size="4" onchange="RateTextBoxChanged()"> %
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col">
+                <div class="d-flex">
+                    <span>&#8377; 50,000 </span>
+                    <input type="range" onchange="AmountChange()" id="rangeAmount" style="width:150px" class="form-range" value="50000" min="50000" max="1000000">
+                     <span>&#8377; 10,00,000</span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="d-flex">
+                    <span> 1 </span>
+                    <input type="range" onchange="YearsChange()" id="rangeYears" style="width:150px" class="form-range" value="1" min="1" max="5">
+                     <span>5</span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="d-flex">
+                    <span> 10.25% </span>
+                    <input type="range" id="rangeRate" onchange="RateChange()" style="width:150px" class="form-range" value="10.25" step="0.01" min="10.25" max="18.45">
+                     <span>18.45%</span>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col text-center">
+                <button onclick="CalculateClick()" class="btn btn-primary">Calculate</button>
+            </div>
+        </div>
+    </div>
+    <p style="font-size:30px" class="mt-3 text-center" id="result"></p>
+</body>
+</html>
+
+
+emi.js
+
+function AmountChange(){
+    document.getElementById("txtAmount").value = document.getElementById("rangeAmount").value;  
+}
+function YearsChange(){
+    document.getElementById("txtYears").value = document.getElementById("rangeYears").value;
+}
+function RateChange(){
+    document.getElementById("txtRate").value = document.getElementById("rangeRate").value;
+}
+function CalculateClick(){
+    var p = parseInt(document.getElementById("txtAmount").value);
+    var n = parseInt(document.getElementById("txtYears").value) * 12;
+    var r = parseFloat(document.getElementById("txtRate").value)/12/100;
+
+    var emi = p * r * Math.pow(1 + r, n) / Math.pow(1 + r, n) - 1;
+
+    document.getElementById("result").innerHTML = "Your monthy installment amount is <b> <span class='text-primary'> &#8377;" + Math.round(emi) + "</span></b> for " + p + " in " + (n/12) + " years.";
+}
+function AmountTextBoxChanged(){
+    document.getElementById("rangeAmount").value = document.getElementById("txtAmount").value;
+}
+function YearTextBoxChanged(){
+    document.getElementById("rangeYears").value = document.getElementById("txtYears").value;
+}
+function RateTextBoxChanged(){
+    document.getElementById("rangeRate").value = document.getElementById("txtRate").value;
+}
+
+Task : BMI Calculator
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <script>
+       function bodyload(){
+        var yourWeight = parseInt(prompt("Enter Weight"));
+            var yourStatus = document.getElementById("yourStatus");
+            if(yourWeight<53) {
+                yourStatus.style.marginLeft = "200px";
+            } else if(yourWeight>54 && yourWeight<70) {
+                yourStatus.style.marginLeft = "600px";
+            }
+       }
+    </script>
+</head>
+<body class="container-fluid" onload="bodyload()">
+    <h2>BMI Status</h2>
+    <div class="progress">
+        <div class="progress-bar bg-dark me-1" style="width:400px">
+             Underweight below 53 kg
+        </div>
+        <div class="progress-bar bg-success me-1" style="width:400px">
+           Normal Weight 54 to 70kg
+       </div>
+       <div class="progress-bar bg-warning me-1" style="width:400px">
+         Overweight  70 to  86 kg
+        </div>
+        <div class="progress-bar bg-danger" style="width:400px">
+            Obese above 86 kg
+       </div>
+    </div>
+    <div>
+      <div id="yourStatus">
+        <span class="bi bi-caret-down-fill"></span>
+        <div>You</div>
+      </div>
+    </div>
+</body>
+</html>
+
+# 14 th MArch 2023
+========================
+JavaScript String
+- String is a literal with group of characters enclosed in
+        a) Double Quotes    "     "
+        b) Single Quotes        '    '
+        c)  Backticks            `    `
+
+- Double and Single quotes are used for inner and outer strings.
+
+     var link = "<a href='home.html'> Home </a>";
+     var link  = '<a href="home.html"> Home </a>';
+
+- String with single and double quote requires lot of contact technique with dynamic value. [   string + dynamic  + string ]
+
+Syntax:
+            "string" + var  + "string" + (expression) + "string";
+
+- ES5+ versions can use "backtick" for string.
+- Backtick allows a string which can embed expression
+- ES5+ versions introduced data binding expression  "${ }"
+
+Syntax:
+            `string ${var} string ${expression} string`
+
+Ex:
+<script>
+    var username = prompt("Enter Name");
+    var age = parseInt(prompt("Enter Age"));
+    var msg1 = "Hello !" + " " + username + " " + "you will be" + " " + (age+1) + " " + "next year.<br>";
+    var msg2 = `Hello ! ${username} you will be ${age+1} next year.<br>`;
+    var msg3 = 'Hello ! ${username} you will be ${age+1} next year.';
+    document.write(msg1);
+    document.write(msg2);
+    document.write(msg3);
+</script>
+
+
+Ex:
+<script>
+    var title = prompt("Enter Title");
+    var loginName = prompt("Enter Login Name", "UserName, Email, Date");
+    var loginType = prompt("Enter Login Type", "Text|Email|Date");
+    var login = `
+       <form>
+        <h2>${title}</h2>
+        <dl>
+             <dt>${loginName}</dt>
+             <dd><input type=${loginType}></dd>
+        </dl>
+        <button>Login</button>
+       </form>
+    `;
+    document.write(login);
+</script>
+
+Note: Single and double quotes will not allow binding expressions.
+
+Syntax: without binding expression
+
+"Your monthy installment amount is <b> <span class='text-primary'> &#8377;" + Math.round(emi) + "</span></b> for " + p + " in " + (n/12) + " years.";
+
+Syntax: with binding expression
+
+`Your monthy installment amount is <b> <span class='text-primary'> &#8377; ${Math.round(emi)} </span> </b> for ${p} in ${(n/12)} years`.
+
+
+- Several chars in a string are non-printable chars.
+- You can print the non-printable chars by using "\"
+                \char
+                \\        => \
+- These are reffered as escape sequence chars.
+                \n        new line in console, alerts, confirm
+                \v        vertical space
+                \t        tab space
+
+Syntax:
+            var path = "D:\images\movie.jpg";
+            document.write(path);
+   
+             D:imagesmovie.jpg
+
+Syntax:
+            var path = "D:\\images\\movie.jpg";
+           
+            D:\images\movie.jpg
+
+- JavaScript provides various string methods for formatting and manipulations.
+
+- String Formatting methods
+        bold()
+        italics()
+        fontcolor()
+        fontsize()
+        sup()
+        sub()
+        toUpperCase()
+        toLowerCase() etc..
+
+- These string formatting functions must be used on "non-RC" type.
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String</title>
+    <script type="text/javascript">
+        function RegisterClick(){
+            var username = document.getElementById("UserName").value;
+            var userError = document.getElementById("UserError");
+            if(username=="")
+            {
+                userError.innerHTML = "User Name Required".fontcolor('red').fontsize(2).bold().italics();
+            } else {
+                document.write("Registered..");
+            }
+        }
+        function ChangeCase(){
+            var ifsc = document.getElementById("ifsc").value;
+            document.getElementById("ifsc").value = ifsc.toUpperCase();
+        }
+    </script>
+</head>
+<body>
+    <dl>
+        <dt>User Name</dt>
+        <dd><input type="text" id="UserName"></dd>
+        <dd id="UserError"></dd>
+        <dt>IFSC Code</dt>
+        <dd><input type="text" onkeyup="ChangeCase()" size="6" id="ifsc"></dd>
+    </dl>
+    <button onclick="RegisterClick()">Register</button>
+</body>
+</html>
+
+- JavaScript allows to format a string using "style" and "class".
+
+        string.style.attributeName = "value";    
+
+  Note: style attributes are written in camel case.
+
+        background-color            backgroundColor
+        text-align                        textAlign
+        margin-left                    marginLeft
+
+           styles are not directly applied to string, they are defined to element
+        that handles string.
+
+Ex:
+       if(username=="")
+            {
+                userError.innerHTML = "User Name Required";
+                userError.style.color = "red";
+                userError.style.fontWeight = "bold";
+
+            } else {
+                document.write("Registered..");
+            }
+        }
+
+- JavaScript allows to configure formats for elements using "css class"
+- CSS class is applied by using "className" property.
+
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String</title>
+    <style>
+        .error-style {
+            color:red;
+            font-weight: bold;
+            font-style: italic;
+        }
+    </style>
+    <script type="text/javascript">
+        function RegisterClick(){
+            var username = document.getElementById("UserName").value;
+            var userError = document.getElementById("UserError");
+            if(username=="")
+            {
+                userError.innerHTML = "User Name Required";
+                userError.className = "error-style";
+
+            } else {
+                document.write("Registered..");
+            }
+        }
+        function ChangeCase(){
+            var ifsc = document.getElementById("ifsc").value;
+            document.getElementById("ifsc").value = ifsc.toUpperCase();
+        }
+    </script>
+</head>
+<body>
+    <dl>
+        <dt>User Name</dt>
+        <dd><input type="text" id="UserName"></dd>
+        <dd id="UserError"></dd>
+        <dt>IFSC Code</dt>
+        <dd><input type="text" onkeyup="ChangeCase()" size="6" id="ifsc"></dd>
+    </dl>
+    <button onclick="RegisterClick()">Register</button>
+</body>
+</html>
+
+# 15th March 2023
+===================
+Ex: Apply Format to Element dynamically.
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Format</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        .dark-theme {
+            padding: 10px;
+            background-color: black;
+            color:white;
+        }
+    </style>
+    <script>
+        function ThemeChange(){
+            var ThemeCheckbox = document.getElementById("ThemeCheckbox");
+            var frmLogin = document.getElementById("frmLogin");
+            var loginButton = document.querySelector("button");
+
+            if(ThemeCheckbox.checked) {
+                frmLogin.className = "dark-theme";
+                loginButton.className = "btn btn-light w-100";
+            } else {
+                frmLogin.className = "p-3";
+                loginButton.className = "btn btn-dark w-100";
+            }
+        }
+    </script>
+</head>
+<body class="container-fluid">
+    <div class="d-flex justify-content-center align-items-center" style="height:400px">
+        <form id="frmLogin">
+            <div class="form-switch">
+                <input type="checkbox" onchange="ThemeChange()" id="ThemeCheckbox" class="form-check-input"> Dark Theme
+            </div>
+            <h2><span class="bi bi-personal-fill"></span> User Login</h2>
+            <dl>
+                <dt>User Name</dt>
+                <dd><input type="text" class="form-control"></dd>
+                <dt>Password</dt>
+                <dd><input type="password" class="form-control"></dd>
+            </dl>
+            <button class="btn btn-dark w-100">Login</button>
+        </form>
+    </div>
+</body>
+</html>
+
+                    String Manipulation Methods and Properties
+
+1. length            : It returns the total number of chars in a string.
+                      String empty is verified by using empty quotes " ".
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String</title>
+    <script>
+        function SubmitClick(){
+            var UserName = document.getElementById("UserName").value;
+            var UserError = document.getElementById("UserError");
+            if(UserName==""){
+                UserError.innerHTML = "User Name Required".fontcolor('red');
+            } else {
+                document.write("Registered..");
+            }
+        }
+        function VerifyName(){
+            var UserName = document.getElementById("UserName").value;
+            var UserError = document.getElementById("UserError");
+            if(UserName.length<4) {
+                UserError.innerHTML = "Name too short min 4 chars".fontcolor('red');
+            } else {
+                UserError.innerHTML = "";
+            }
+            if(UserName.length>10) {
+                UserError.innerHTML  = "Name too long max 10 chars".fontcolor('red');
+            }
+            if(UserName=="") {
+                UserError.innerHTML = "User Name Required".fontcolor('red');
+            }
+        }
+    </script>
+</head>
+<body>
+    <dl>
+        <dt>User Name</dt>
+        <dd><input type="text" onkeyup="VerifyName()" id="UserName"></dd>
+        <dd id="UserError"></dd>
+    </dl>
+    <button onclick="SubmitClick()">Submit</button>
+</body>
+</html>
+
+2. charAt()        : It returns the character present at specified index.
+
+                      var str = "Welcome";
+                      str.charAt(1);            // e
+                      str.charAt(15);            // void - no return type
+
+3. charCodeAt()    : It returns the ASCII code character present at sepcified    
+                      index.
+
+                       var str = "Ajay";
+                       str.charCodeAt(0);        // 65
+
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function VerifyUser(){
+            var UserName = document.getElementById("UserName").value;
+            var UserError = document.getElementById("UserError");
+            if(UserName.charCodeAt(0)>=65 && UserName.charCodeAt(0)<=90) {
+                UserError.innerHTML = "";
+            } else {
+                UserError.innerHTML = "Name must start with uppercase letter".fontcolor('red');
+            }
+        }
+    </script>
+</head>
+<body>
+    User Name: <input type="text" onblur="VerifyUser()" id="UserName"> <span id="UserError"></span>
+</body>
+</html>
+
+4. indexOf()            : It returns the index number of character present at
+                          specified index.
+
+                        var str = "Welcome";
+                        str.indexOf("e");            // 1    only first occurance
+                        str.indexOf("b");            //  -1
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function VerifyEmail(){
+            var Email = document.getElementById("Email").value;
+            var EmailError = document.getElementById("EmailError");
+            if(Email.indexOf("@")==-1) {
+                EmailError.innerHTML = "Invalid Email - Please include @ in Email".fontcolor('red');
+            } else {
+                EmailError.innerHTML = "";
+            }
+        }
+    </script>
+</head>
+<body>
+    Email : <input type="email" onblur="VerifyEmail()" id="Email"> <span id="EmailError"></span>
+</body>
+</html>
+
+5. lastIndexOf()            : It gets the last occurance index number of a char.
+           
+                            var str = "Welcome";
+                            str.indexOf("e");            // 1
+                            str.lastIndexOf("e");        // 6
+                            str.lastIndexOf("b");        // -1
+
+
+# 16th March 2023
+==========================
+String Manipulations
+- length
+- charAt()
+- charCodeAt()
+- indexOf()
+- lastIndexOf()
+- startsWith()                : It returns boolean true if string starts with specified
+                              chars.
+- endsWith()                : It returns true if string ends with specified chars
+
+
+Syntax:
+            var str = "Welcome";
+            str.startsWith("w");        // false
+            str.startsWith("W");        // true
+            str.endsWith("e");        // true
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function VerifyEmail(){
+            var email = document.getElementById("Email").value;
+            var emailError = document.getElementById("EmailError");
+
+            if(email.endsWith("outlook.com")) {
+                emailError.innerHTML = "";
+            } else {
+                emailError.innerHTML = "Please provide a valid Skype Account".fontcolor('red');
+            }
+        }
+        function VerifyCard(){
+            var card = document.getElementById("Card").value;
+            var pic = document.getElementById("pic");
+            if(card.startsWith("44")){
+                pic.src="../public/images/visa.png";
+            } else if (card.startsWith("55")){
+                pic.src="../public/images/master.png";
+            } else {
+                pic.src = "";
+                pic.alt = "N/A";
+            }
+        }
+    </script>
+</head>
+<body>
+    <dl>
+        <dt>Your Skype Account</dt>
+        <dd><input type="email" onblur="VerifyEmail()" placeholder="@outlook" id="Email"></dd>
+        <dd id="EmailError"></dd>
+        <dt>Your Card Number</dt>
+        <dd><input type="text" onkeyup="VerifyCard()" id="Card"><img width="50" align="left" height="20" id="pic"></dd>
+    </dl>
+</body>
+</html>
+
+- slice()            : It reads and returns the chars between specified index.
+                       
+Syntax:
+        slice(startIndex, endIndex)        => chars between specified index
+        slice(startIndex)                    => chars from start to end index
+        slice(7,4)                            => It can't read, end index must be    
+                                                the index after start.
+
+- substr()            : It reads specified chars from given index.
+   
+Syntax:
+        substr(startIndex, howMany)
+        substr(7, 4);                        => from 7 it reads 4 chars
+        substr(7,0);                        => will not read any chars
+        substr(7);                            => read upto end
+
+- substring()        : It reads specified chars bi-directional.
+
+Syntax:
+        substring(startIndex, endIndex)    => end Index can be any direction
+        substring(7)                            => from 7 to end
+        substring(7,0)                        => from 7 to 0 [start]
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function GetDetails(){
+            var email = document.getElementById("Email").value;
+            var atPos = email.indexOf("@");
+            var id = email.substring(atPos,0);
+            var domain = email.substring(atPos + 1);
+            document.getElementById("Id").innerHTML = id;
+            document.getElementById("domain").innerHTML = domain;
+        }
+    </script>
+</head>
+<body>
+    Your Email : <input type="email" onblur="GetDetails()" id="Email">
+    <dl>
+        <dt>Your ID</dt>
+        <dd id="Id"></dd>
+        <dt>Domain</dt>
+        <dd id="domain"></dd>
+    </dl>
+</body>
+</html>
+
+- split()            : It splits a string at specified char and returns an array.
+
+Syntax:
+        string.split(' char ');
+
+Ex:
+<script>
+    var products = "Samsung TV-46000.44, Nike Casuals-5000.44";
+    var [tv, shoe] = products.split(',');
+    var [name, price] = shoe.split('-');
+    document.write(`<h2>Shoe Details</h2>
+        Name : ${shoe.substring(shoe.indexOf("-"),0)} <br>
+        Price: ${shoe.substring(shoe.indexOf("-")+1)} <br>
+        <hr>
+        Shoe Name: ${name} <br>
+        Shoe Price: ${price}
+    `);
+</script>
+
+Ex:
+<script>
+    var products = "Samsung TV-46000.44, Nike Casuals-5000.44";
+    var [tv, shoe] = products.split(',');
+    var details = shoe.split('-');
+    document.write(`<h2>Shoe Details</h2>
+        Name : ${shoe.substring(shoe.indexOf("-"),0)} <br>
+        Price: ${shoe.substring(shoe.indexOf("-")+1)} <br>
+        <hr>
+        Shoe Name: ${details[0]} <br>
+        Shoe Price: ${details[1]}
+    `);
+</script>
+
+- trim()                : It is used to remove leading spaces in a string.
+                      [space before and after string]
+
+Syntax:
+        string.trim()
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function SubmitClick(){
+            var UserId = document.getElementById("UserId").value;
+            if(UserId.trim()=="john_nit") {
+                document.write("Success..");
+            } else {
+                alert("Invalid UserId");
+            }
+        }
+    </script>
+</head>
+<body>
+    Your UserId:
+    <input type="text" id="UserId">
+    <button onclick="SubmitClick()">Submit</button>
+</body>
+</html>
+
+- match()            :  It verifies your string by matching it against a regular
+                       expression and return true if matched.
+
+Syntax:
+         string.match(/regularExpression/);
+
+- Regular expression is built with meta characters and quantifiers.
+
+Meta Characters
+-----------------------
+?                        zero or one occurance of a character.
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+       function SubmitClick(){
+          var test = document.getElementById("test").value;
+          if(test.match(/colou?r/)) {
+              document.write(`Your entered : ${test}`);
+          } else {
+            alert("Only Color | Colour Allowed");
+          }
+       }
+    </script>
+</head>
+<body>
+        Your string : <input type="text" id="test"> <button onclick="SubmitClick()">Submit</button>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Text Attributes
+- name
+- id
+- class
+- value
+- size
+- placeholder
+- autofocus
+- minlength
+- maxlength
+- required
+- list
+- pattern            : It uses a regular expression to verify the format of input.
+- disabled
+- readonly
