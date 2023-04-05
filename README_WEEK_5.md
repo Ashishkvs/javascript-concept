@@ -667,3 +667,185 @@ Ex:
     document.write(`x(${typeof x})===y(${typeof y}) ? ` + (x===y) + "<br>");
 
 </script>
+
+# 5th April 2023
+==============================
+Arithematic Operators
+    string + string        ? string
+    string + number        ? string
+    string + boolean        ? string
+   
+    number+number        ? number
+    number+boolean    ? number        => 1 + true => 2
+    number+string        ? string
+
+    boolean+boolean    ? number        => true + true = 2
+
+    string - string            ? NaN
+    string * string            ? NaN
+    string / string            ? NaN
+ 
+
+
+
+                                        Logical Operators
+&&        AND
+||        OR
+!        NOT
+
+            (condition1)  &&  (condition2)    =>   true if all conditions true
+                                                        false if any one condition is false.
+
+            (condition1) ||   (condition2)      =>  true if any one condition is true.
+                                                  =>  false if all conditions are false.
+
+            ! Not                                  => !true  = false
+                                                      !false  = true
+
+
+                                    Assignment Operators
++=                Add and assign
+-=                sub and assign
+/=                divide and assign
+*=                multiply and assign
+%=                modulus and assign
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var margin = 1;
+        function MoveClick(){
+           margin *= 2;
+           document.getElementById("pic").style.marginLeft = margin + "px";
+        }
+        function ClearClick(){
+           margin=1;
+           document.getElementById("pic").style.marginLeft = margin + "px";
+        }
+    </script>
+</head>
+<body>
+    <button onclick="MoveClick()">Move</button>
+    <button onclick="ClearClick()">Clear</button>
+    <div>
+        <img src="images/shoe.jpg" width="100" height="100" id="pic">
+    </div>
+</body>
+</html>
+
+
+
+
+- JavaScript provides DOM methods to accessing multiple elements
+           
+        document.getElementsByTagName() [ ]
+        document.getElementsByName() [ ]
+        document.getElementsByClassName() [ ]
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var categoryName = "";
+       function SubmitClick(){
+          categoryName = "";
+          var categoryCheckBoxes = document.getElementsByName("Category");
+          for(var checkbox of categoryCheckBoxes){
+              if(checkbox.checked) {
+                  categoryName += checkbox.value + "<br>";
+              }
+          }
+          document.querySelector("p").innerHTML = categoryName;
+       }
+    </script>
+</head>
+<body>
+    <h3>Categories</h3>
+    <ul style="list-style: none;">
+        <li><input type="checkbox" name="Category" value="Electronics"> Electronics</li>
+        <li><input type="checkbox" name="Category" value="Footwear"> Footwear</li>
+        <li><input type="checkbox" name="Category" value="Kids Fashion"> Kids Fashion</li>
+        <li><input type="checkbox" name="Category" value="Jewelery"> Jewelery </li>
+    </ul>
+    <button onclick="SubmitClick()">Submit</button>
+    <p></p>
+</body>
+</html>
+
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var categoryName = "";
+       function CategoryChanged(){
+          categoryName = "";
+          var categoryCheckBoxes = document.getElementsByName("Category");
+          for(var checkbox of categoryCheckBoxes){
+              if(checkbox.checked) {
+                  categoryName += checkbox.value + "<br>";
+              }
+          }
+          document.querySelector("p").innerHTML = categoryName;
+       }
+    </script>
+</head>
+<body>
+    <h3>Categories</h3>
+    <ul style="list-style: none;">
+        <li><input type="checkbox" onchange="CategoryChanged()" name="Category" value="Electronics"> Electronics</li>
+        <li><input type="checkbox" onchange="CategoryChanged()" name="Category" value="Footwear"> Footwear</li>
+        <li><input type="checkbox" onchange="CategoryChanged()" name="Category" value="Kids Fashion"> Kids Fashion</li>
+        <li><input type="checkbox" onchange="CategoryChanged()" name="Category" value="Jewelery"> Jewelery </li>
+    </ul>
+    <p></p>
+</body>
+</html>
+
+Ex:
+<script>
+    var products = [
+        {Name:"TV", Category:"Electronics"},
+        {Name:"Nike Casuals", Category:"Footwear"},
+        {Name:"Shirt", Category:"Fashion"},
+        {Name:"Watch", Category:"Electronics"}
+    ];
+    var result = products.filter(function(product){
+        return product.Category=="Footwear" || product.Category=="Fashion";
+    })
+    for(var item of result) {
+        document.write(item.Name + "<br>");
+    }
+</script>
+
+Ex:
+<script>
+    fetch("http://fakestoreapi.com/products&quot;)
+    .then(function(res){
+        return res.json();
+    })
+    .then(function(products){
+        var result = products.filter(function(product){
+            return product.category=="electronics" || product.category=="jewelery";
+        });
+        for(var item of result) {
+            document.write(item.title + "-" + item.category + "<br>");
+        }
+    })
+</script>
