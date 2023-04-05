@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="./operator.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>Operatrors</h1>
+
+    <div class="text-center">
+        <div>
+            <button onclick="onLoadTemplate()" class="btn btn-primary">Load Template</button>
+            <div class="text-center" id="loading" style="display: none;">
+                <progress id="progress" min="1" max="100" value="1"></progress>
+                <p id="status"></p>
+                <div>Loading</div>
+            </div>
+    </div>
+</body>
+
+</html>
